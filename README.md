@@ -17,7 +17,7 @@ sudo apt install -y libdb4.8-dev libdb4.8++-dev
 
 ## **Clone the BonkCoin Repository**
 ```bash
-git clone https://github.com/yourusername/bonkcoin.git
+git clone https://github.com/bonkcoins/bonkcoin.git
 cd bonkcoin
 ```
 
