@@ -1,104 +1,75 @@
-# BonkCoin
+```markdown
+# BonkCoin Full Node Build Guide
 
-BonkCoin is a secure and decentralized cryptocurrency designed for fast and efficient peer-to-peer transactions. It uses the Scrypt algorithm and supports Proof-of-Work (PoW) mining. 
-
-**Website:** [BonkCoin Official Website](https://bonkpow.com)  
-**Explorer:** [BonkCoin Blockchain Explorer](https://explore.bonkpow.com)
-
----
-
-## Features
-
-- **Scrypt Algorithm:** Optimized for secure and efficient mining.
-- **Fast Transactions:** Designed for quick and reliable payments.
-- **Open Source:** Fully transparent and customizable.
-
----
-
-## How to Build a Full Node
-
-Follow these steps to compile and run a BonkCoin full node using the `depends` directory.
-
-### Prerequisites
-
-- **Operating System:** Ubuntu 20.04+ (or similar Linux distributions)
-- **Tools and Dependencies:**
-  - `build-essential`
-  - `autoconf`
-  - `automake`
-  - `libtool`
-  - `pkg-config`
-  - `bison`
-  - `g++`
-  - `make`
-
-Install them with:
+## **Prerequisites**
+Ensure you have the following dependencies installed:
 ```bash
-sudo apt-get update
-sudo apt-get install -y build-essential autoconf automake libtool pkg-config bison g++ make
+sudo apt update
+sudo apt install -y build-essential libtool autotools-dev automake pkg-config bsdmainutils python3 cmake curl git
+sudo apt install -y libssl-dev libevent-dev libboost-all-dev
+sudo apt install -y software-properties-common
+sudo add-apt-repository ppa:bitcoin/bitcoin
+sudo apt update
+sudo apt install -y libdb4.8-dev libdb4.8++-dev
 ```
 
-### Step-by-Step Guide
+---
 
-1. **Clone the Repository**
-   ```bash
-   git clone https://github.com/bonkcoins/bonkcoin.git
-   cd bonkcoin
-   ```
+## **Clone the BonkCoin Repository**
+```bash
+git clone https://github.com/yourusername/bonkcoin.git
+cd bonkcoin
+```
 
-2. **Build the Dependencies**
-   Navigate to the `depends` directory and compile the dependencies:
+---
+
+## **Build Dependencies**
+Navigate to the `depends` directory and build the required dependencies:
+```bash
+cd depends
+chmod +x config.guess config.sub
+make -j$(nproc)
+```
+
+---
+
+## **Build BonkCoin**
+1. Return to the root directory:
    ```bash
-   cd depends
-   make -j$(nproc)
    cd ..
    ```
 
-3. **Configure the Build**
-   Use the `depends` output to set up the build environment:
+2. Run the autogen script:
    ```bash
    ./autogen.sh
-   ./configure --prefix=$(pwd)/depends/x86_64-pc-linux-gnu
    ```
 
-4. **Compile BonkCoin**
-   Start the build process:
+3. Configure the build to use the dependencies:
+   ```bash
+   ./configure --prefix=`pwd`/depends/x86_64-pc-linux-gnu
+   ```
+
+4. Build BonkCoin:
    ```bash
    make -j$(nproc)
    ```
 
-5. **Run the Full Node**
-   After compilation, you can start the node:
+---
+
+## **Run the BonkCoin Node**
+1. Start the BonkCoin daemon:
    ```bash
    ./src/bonkcoind
    ```
 
-6. **Configuration**
-   Create a configuration file at `~/.bonkcoin/bonkcoin.conf`:
-   ```conf
-   rpcuser=yourrpcuser
-   rpcpassword=yourrpcpassword
-   daemon=1
-   server=1
-   ```
-   Start the node again:
+2. To check the node status, use the CLI:
    ```bash
-   ./src/bonkcoind -daemon
+   ./src/bonkcoin-cli getblockchaininfo
    ```
 
 ---
 
-## Mining with BonkCoin
-
-BonkCoin uses the Scrypt algorithm for mining. You can connect your miners to your full node or use an external pool. Explore blocks, transactions, and addresses with our [Blockchain Explorer](https://explore.bonkpow.com).
-
----
-
-## Resources
-
-- **Official Website:** [https://bonkpow.com](https://bonkpow.com)  
-- **Explorer:** [https://explore.bonkpow.com](https://explore.bonkpow.com)
-
----
-
-Feel free to contribute or submit issues. Happy mining!
+## **Important Links**
+- **Website**: [https://bonkpow.com](https://bonkpow.com)  
+- **Explorer**: [https://explore.bonkpow.com](https://explore.bonkpow.com)
+```
