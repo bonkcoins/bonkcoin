@@ -1,79 +1,104 @@
-Bonkcoin Core integration/staging tree
-=====================================
+# BonkCoin
 
-[![Build Status](https://travis-ci.org/bonkcoin-project/bonkcoin.svg?branch=master)](https://travis-ci.org/bonkcoin-project/bonkcoin)
+BonkCoin is a secure and decentralized cryptocurrency designed for fast and efficient peer-to-peer transactions. It uses the Scrypt algorithm and supports Proof-of-Work (PoW) mining. 
 
-https://bonkcoin.org
+**Website:** [BonkCoin Official Website](https://bonkpow.com)  
+**Explorer:** [BonkCoin Blockchain Explorer](https://explore.bonkpow.com)
 
-What is Bonkcoin?
-----------------
+---
 
-Bonkcoin is an experimental digital currency that enables instant payments to
-anyone, anywhere in the world. Bonkcoin uses peer-to-peer technology to operate
-with no central authority: managing transactions and issuing money are carried
-out collectively by the network. Bonkcoin Core is the name of open source
-software which enables the use of this currency.
+## Features
 
-For more information, as well as an immediately useable, binary version of
-the Bonkcoin Core software, see [https://bonkcoin.org](https://bonkcoin.org).
+- **Scrypt Algorithm:** Optimized for secure and efficient mining.
+- **Fast Transactions:** Designed for quick and reliable payments.
+- **Open Source:** Fully transparent and customizable.
 
-License
--------
+---
 
-Bonkcoin Core is released under the terms of the MIT license. See [COPYING](COPYING) for more
-information or see https://opensource.org/licenses/MIT.
+## How to Build a Full Node
 
-Development Process
--------------------
+Follow these steps to compile and run a BonkCoin full node using the `depends` directory.
 
-The `master` branch is regularly built and tested, but is not guaranteed to be
-completely stable. [Tags](https://github.com/bonkcoin-project/bonkcoin/tags) are created
-regularly to indicate new official, stable release versions of Bonkcoin Core.
+### Prerequisites
 
-The contribution workflow is described in [CONTRIBUTING.md](CONTRIBUTING.md).
+- **Operating System:** Ubuntu 20.04+ (or similar Linux distributions)
+- **Tools and Dependencies:**
+  - `build-essential`
+  - `autoconf`
+  - `automake`
+  - `libtool`
+  - `pkg-config`
+  - `bison`
+  - `g++`
+  - `make`
 
-The developer [mailing list](https://groups.google.com/forum/#!forum/bonkcoin-dev)
-should be used to discuss complicated or controversial changes before working
-on a patch set.
+Install them with:
+```bash
+sudo apt-get update
+sudo apt-get install -y build-essential autoconf automake libtool pkg-config bison g++ make
+```
 
-Developer IRC can be found on Freenode at #bonkcoin-dev.
+### Step-by-Step Guide
 
-Testing
--------
+1. **Clone the Repository**
+   ```bash
+   git clone https://github.com/YourUsername/bonkcoin.git
+   cd bonkcoin
+   ```
 
-Testing and code review is the bottleneck for development; we get more pull
-requests than we can review and test on short notice. Please be patient and help out by testing
-other people's pull requests, and remember this is a security-critical project where any mistake might cost people
-lots of money.
+2. **Build the Dependencies**
+   Navigate to the `depends` directory and compile the dependencies:
+   ```bash
+   cd depends
+   make -j$(nproc)
+   cd ..
+   ```
 
-### Automated Testing
+3. **Configure the Build**
+   Use the `depends` output to set up the build environment:
+   ```bash
+   ./autogen.sh
+   ./configure --prefix=$(pwd)/depends/x86_64-pc-linux-gnu
+   ```
 
-Developers are strongly encouraged to write [unit tests](src/test/README.md) for new code, and to
-submit new unit tests for old code. Unit tests can be compiled and run
-(assuming they weren't disabled in configure) with: `make check`. Further details on running
-and extending unit tests can be found in [/src/test/README.md](/src/test/README.md).
+4. **Compile BonkCoin**
+   Start the build process:
+   ```bash
+   make -j$(nproc)
+   ```
 
-There are also [regression and integration tests](/qa) of the RPC interface, written
-in Python, that are run automatically on the build server.
-These tests can be run (if the [test dependencies](/qa) are installed) with: `qa/pull-tester/rpc-tests.py`
+5. **Run the Full Node**
+   After compilation, you can start the node:
+   ```bash
+   ./src/bonkcoind
+   ```
 
-The Travis CI system makes sure that every pull request is built for Windows, Linux, and OS X, and that unit/sanity tests are run automatically.
+6. **Configuration**
+   Create a configuration file at `~/.bonkcoin/bonkcoin.conf`:
+   ```conf
+   rpcuser=yourrpcuser
+   rpcpassword=yourrpcpassword
+   daemon=1
+   server=1
+   ```
+   Start the node again:
+   ```bash
+   ./src/bonkcoind -daemon
+   ```
 
-### Manual Quality Assurance (QA) Testing
+---
 
-Changes should be tested by somebody other than the developer who wrote the
-code. This is especially important for large or high-risk changes. It is useful
-to add a test plan to the pull request description if testing the changes is
-not straightforward.
+## Mining with BonkCoin
 
-Translations
-------------
+BonkCoin uses the Scrypt algorithm for mining. You can connect your miners to your full node or use an external pool. Explore blocks, transactions, and addresses with our [Blockchain Explorer](https://explore.bonkpow.com).
 
-We only accept translation fixes that are submitted through [Bitcoin Core's Transifex page](https://www.transifex.com/projects/p/bitcoin/).
-Translations are converted to Bonkcoin periodically.
+---
 
-Translations are periodically pulled from Transifex and merged into the git repository. See the
-[translation process](doc/translation_process.md) for details on how this works.
+## Resources
 
-**Important**: We do not accept translation changes as GitHub pull requests because the next
-pull from Transifex would automatically overwrite them again.
+- **Official Website:** [https://bonkpow.com](https://bonkpow.com)  
+- **Explorer:** [https://explore.bonkpow.com](https://explore.bonkpow.com)
+
+---
+
+Feel free to contribute or submit issues. Happy mining!
