@@ -17,19 +17,36 @@ sudo apt install -y libdb4.8-dev libdb4.8++-dev
 
 ## **Clone the BonkCoin Repository**
 ```bash
-git clone https://github.com/bonkcoins/bonkcoin.git
+git clone https://github.com/yourusername/bonkcoin.git
 cd bonkcoin
 ```
 
 ---
 
+## **Generate Makefile for the `depends` Directory**
+1. Navigate to the `depends` directory:
+   ```bash
+   cd depends
+   ```
+
+2. Generate the `Makefile`:
+   ```bash
+   ./config.guess
+   ./config.sub
+   ```
+
+---
+
 ## **Build Dependencies**
-Navigate to the `depends` directory and build the required dependencies:
-```bash
-cd depends
-chmod +x config.guess config.sub
-make -j$(nproc)
-```
+1. Ensure the `config.guess` and `config.sub` scripts are executable:
+   ```bash
+   chmod +x config.guess config.sub
+   ```
+
+2. Build the required dependencies:
+   ```bash
+   make -j$(nproc)
+   ```
 
 ---
 
