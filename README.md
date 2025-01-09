@@ -46,6 +46,10 @@ find . -type f -name "*.sh" -exec chmod +x {} \;
 
 2. Build the dependencies:
    ```bash
+   chmod +x config.guess
+   chmod +x config.sub
+   ./config.guess
+   ./config.sub
    make -j$(nproc)
    ```
 
