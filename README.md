@@ -42,7 +42,7 @@ sudo apt-get install -y build-essential autoconf automake libtool pkg-config bis
 
 1. **Clone the Repository**
    ```bash
-   git clone https://github.com/YourUsername/bonkcoin.git
+   git clone https://github.com/bonkcoins/bonkcoin.git
    cd bonkcoin
    ```
 
