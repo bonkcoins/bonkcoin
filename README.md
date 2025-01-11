@@ -2,6 +2,8 @@
 
 Bonkcoin is a custom cryptocurrency based on the Litecoin codebase. This guide explains how to build a Bonkcoin full node on Linux.
 
+RPC PORT: 42332
+P2P PORT: 42333
 ---
 
 ### **Prerequisites**
